@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/demonet: "true"
+    io.kompose.service: pgadmin4
+  name: pgadmin4
+spec:
+  containers:
+    - env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: admin@mydomain.com
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: Qwerty
+        - name: SCRIPT_NAME
+          value: /pgadmin4
+      image: 825765412441.dkr.ecr.us-east-1.amazonaws.com/pgadmin4:latest
+      name: pgadmin4
+      ports:
+        - containerPort: 80
+      resources: {}
+  restartPolicy: Never
+status: {}
